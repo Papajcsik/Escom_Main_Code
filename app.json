@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Escom_Beta",
+    "slug": "Escom_Beta",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/escomicon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/escomsplash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/escomadaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/escomfavicon.png"
+    }
+  }
+}
