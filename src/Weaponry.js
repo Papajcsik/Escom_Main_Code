@@ -538,12 +538,18 @@ const backgroundImage = require('../gombok/Weaponry/escom-mobil-gombokuj-nagy-ha
           <Text style={[GlobalStyles.szoveg,]} >DEPARTMENT</Text>
         </View>
 
-        <View style={{position: 'relative', height: "100%", aspectRatio: 1.4, borderWidth: 0, borderColor: Colors.white, }}>
-            <Text style={[GlobalStyles.szoveg , {paddingTop:"6%"}]}>
-                {escoin}
+        
+        <View style={{position: 'relative', height: "100%", aspectRatio: 1.4, borderWidth: 0, justifyContent: 'flex-start', borderColor: Colors.white, }}>
+            
+          <View style={{borderColor: Colors.red, borderWidth: 2, backgroundColor: Colors.black, alignItems: 'center', justifyContent: 'center', height: "80%", paddingLeft: "2%", }}>
+            <Text 
+              style={{color: Colors.white, fontSize: "7.2vw",}}>
+                {( "0" + Math.floor((time / 60000) % 60)).slice(-2)}:{( "0" + Math.floor((time / 1000) % 60)).slice(-2)}
             </Text>
-          <Text style={{color: Colors.white, alignSelf: 'center',  letterSpacing: 2, fontSize: "3.5vw" }}>ESCOINS</Text>     
+          </View>
+              
         </View>
+
 
       </View>
 
@@ -724,15 +730,6 @@ const backgroundImage = require('../gombok/Weaponry/escom-mobil-gombokuj-nagy-ha
             ))}
           </View>
 
-
-        <View style={{borderColor: Colors.white, borderWidth: 0, width: "90%", flexDirection: 'row-reverse', position: 'absolute', top:"84%"}}>
-          <View style={{borderColor: Colors.red, borderWidth: 2, backgroundColor: Colors.black, alignItems: 'center', height: "100%" }}>
-            <Text 
-              style={{color: Colors.white, fontSize: "7.2vw", marginLeft: 4, marginRight: 4 }}>
-                {( "0" + Math.floor((time / 60000) % 60)).slice(-2)}:{( "0" + Math.floor((time / 1000) % 60)).slice(-2)}
-            </Text>
-          </View>
-        </View>      
 
         
       </View>

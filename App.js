@@ -21,7 +21,6 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 
-
 const HomeStack = () => {
   return(
 
