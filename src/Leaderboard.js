@@ -42,6 +42,8 @@ export default function Leaderboard(props) {
     {id: 10, image: IMAGES.escoin_image, player: 'gipsy', playedGames: 9, points: 3 },
   ]);*/
 
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const [trigger, setTrigger] = useState(false);
 
 
 
@@ -74,14 +76,21 @@ export default function Leaderboard(props) {
     
         <StatusBar style="dark" />
 
-    <View style={{width:"100%", height:"96%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', paddingTop: "4%"}}>
+  
 
-      <View style={{width:"92%", height:"92%" , borderWidth: 0, borderColor: Colors.white, alignItems: 'center', backgroundColor: Colors.darkBlue}}>
+   
+      <View style={{width:"100%", height:"96%" , borderWidth: 1, borderColor: Colors.blue, alignItems: 'center', paddingTop: "4%"}}>
+
+      <View style={{width:"92%", height:"89%" , borderWidth: 1, borderColor: Colors.white, alignItems: 'center',}}>
        
-        <TouchableOpacity style={{width:"100%", aspectRatio: 6}}>
+        <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
+                          onPress={()=>{setCurrentIndex('Armory'); setTrigger(!trigger)}}>
           <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
         </TouchableOpacity>
 
+        
+     
+      { currentIndex === 'Armory' && trigger &&
         <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center',}}>
           
               <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -138,27 +147,41 @@ export default function Leaderboard(props) {
             }
          
           </ScrollView>
+
+        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        
+            <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={()=>{myLocation()}}
+              style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+                <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.myLocation}/>
+            </TouchableOpacity>
+
         </View>
 
+        </View>
+        }
 
-
-      </View>
-
-      <View style={{width:"92%", height:"9%" , borderWidth: 0, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
-        
-        <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
-          <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={()=>{myLocation()}}
-          style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
-            <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.myLocation}/>
+        <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
+                          onPress={()=>{setCurrentIndex('Weaponry'); setTrigger(!trigger)}}>
+          <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
         </TouchableOpacity>
 
-      </View>
+      
    
 
+      </View>
+
+
+
+
+      
+
     </View>
+    
+
 
 
 

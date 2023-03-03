@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Pressable, TouchableOpacity, SafeAreaView, Image } from 'react-native'
-import { Colors, IMAGES } from './Constants'
+import { View, Text, Pressable, TouchableOpacity, SafeAreaView, Image, ImageBackground } from 'react-native'
+import { Colors, IMAGES, profileImages } from './Constants'
 import GlobalStyles from './GlobalStyles'
 import { Modal } from 'react-native'
 import { auth, db} from '../firebase'
@@ -37,7 +37,8 @@ export default function Users(props) {
 
   return (
     <SafeAreaView style={GlobalStyles.container}>
-
+      <ImageBackground source={profileImages.screenBackground} style={{width:"100%", height:"100%"}}>
+        <ImageBackground source={profileImages.keret} style={{width:"100%", height:"100%"}}>
       <View style={{width:'100%', height:'100%', alignItems: 'center', justifyContent: 'center'}}>
 
 
@@ -47,7 +48,7 @@ export default function Users(props) {
             
             <View style={{width:"20%", aspectRatio:1,borderRadius:50, borderWidth:3, borderColor: Colors.purple}}>
               <TouchableOpacity onPress={()=>{setProfileModal(true)}} style={{width:'100%', height:'100%'}}>
-                  <Image source={IMAGES.escoin_image} style={{width:'100%', height:'100%'}}/>
+                  <Image source={profileImages.blankProfilePicture} style={{width:'100%', height:'100%'}}/>
               </TouchableOpacity>
             </View>
 
@@ -102,6 +103,8 @@ export default function Users(props) {
             </Modal>
 
       </View>
+            </ImageBackground>
+      </ImageBackground>
 
     </SafeAreaView>
 

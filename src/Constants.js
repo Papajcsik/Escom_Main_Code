@@ -125,6 +125,15 @@ export const Musics  = {
 
 };
 
+export const profileImages = {
+
+  screenBackground: require('../assets/images/Profile/profil-háttér.png'),
+  keret: require('../assets/images/Profile/profil-keret.png'),
+  achievement: require('../assets/images/Profile/profil-achi-gomb.png'),
+  back: require('../assets/images/Profile/profil-back-to-home-gomb.png'),
+  blankProfilePicture: require('../assets/images/Profile/profil-kepkeret.png'),
+};
+
 export const countries = {
   "AF": "Afghanistan",
   "AX": "Aland Islands",
