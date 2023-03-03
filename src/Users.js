@@ -39,27 +39,33 @@ export default function Users(props) {
     <SafeAreaView style={GlobalStyles.container}>
       <ImageBackground source={profileImages.screenBackground} style={{width:"100%", height:"100%"}}>
         <ImageBackground source={profileImages.keret} style={{width:"100%", height:"100%"}}>
-      <View style={{width:'100%', height:'100%', alignItems: 'center', justifyContent: 'center'}}>
 
-
-      <Text style={{color: Colors.white, fontSize: 25, fontWeight: 'bold', top: 20, letterSpacing: 4,}}>User</Text>
-            <br></br>
-
-            
-            <View style={{width:"20%", aspectRatio:1,borderRadius:50, borderWidth:3, borderColor: Colors.purple}}>
-              <TouchableOpacity onPress={()=>{setProfileModal(true)}} style={{width:'100%', height:'100%'}}>
+            <View style={{height:"19%", width:"100%",borderRadius:0, borderWidth:0, borderColor: Colors.purple, flexDirection: 'row'}}>
+              <TouchableOpacity onPress={()=>{setProfileModal(true)}} style={{width:'37%', height:'100%'}}>
                   <Image source={profileImages.blankProfilePicture} style={{width:'100%', height:'100%'}}/>
               </TouchableOpacity>
+
+                      <View style={{height:"60%", width:"63%", borderWidth:0, borderColor: Colors.purple, alignItems: 'center', justifyContent: 'center', bottom: "6%"}}>
+
+                        <Text style={{color: Colors.white, fontSize: 15, top: 2, letterSpacing: 2, }}>Contractor Name</Text>
+                        
+                          { users.filter((val)=>{if(val.id == auth.currentUser.uid){return val}}).map((user) => 
+                          {return <View key={user.id}> 
+                            
+                            <Text style={{color: Colors.white, fontSize: 20, fontWeight: 'bold', top: 12, letterSpacing: 4, }}>{user.GameID}</Text>
+                            </View> } )}
+                      
+                      </View>
+
             </View>
 
-            <br></br>
+      <View style={{width:'100%', height:'81%', paddingLeft:"8%", paddingTop:"20%", borderWidth: 1, borderColor:Colors.white}}> 
+ 
 
       {users.filter((val)=>{if(val.id == auth.currentUser.uid){return val}}).map((user) => 
      {return <View key={user.id}> 
-       <Text style={{color: Colors.white, fontSize: 20}}>GameID:  {user.GameID}
-       </Text>
-       <Text style={{color: Colors.white, fontSize: 20}}>First Name:    {user.First_name}</Text>
-       <Text style={{color: Colors.white, fontSize: 20}}>Last Name:    {user.Last_name}</Text>
+      
+       <Text style={{color: Colors.white, fontSize: 20}}>Name:  {user.First_name} {user.Last_name}</Text>
        <Text style={{color: Colors.white, fontSize: 20}}>Escoins:    {user.Escoins}</Text>
        </View> } )}
 
