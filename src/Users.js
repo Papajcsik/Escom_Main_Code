@@ -11,6 +11,8 @@ import { collection, getDocs} from 'firebase/firestore'
 
 
 export default function Users(props) {
+
+
   const userRef = collection(db, "users");
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -33,9 +35,11 @@ export default function Users(props) {
   }
 
   const [profileModal, setProfileModal] = useState(false);
+  const [achievementModal, setAchievementModal] = useState(false);
+
   const escoin = 0;
 
-  
+
   return (
     <SafeAreaView style={GlobalStyles.container}>
       <ImageBackground source={profileImages.screenBackground} style={{width:"100%", height:"100%"}}>
@@ -60,24 +64,15 @@ export default function Users(props) {
 
             </View>
 
-      <View style={{width:'100%', height:'81%', paddingLeft:"8%", paddingTop:"20%", borderWidth: 1, borderColor:Colors.white}}> 
+      <View style={{width:'100%', height:'67%', paddingLeft:"8%", paddingTop:"20%", borderWidth: 0, borderColor:Colors.white}}> 
  
 
-      {users.filter((val)=>{if(val.id == auth.currentUser.uid){return val}}).map((user) => 
-     {return <View key={user.id}> 
-      
-       <Text style={{color: Colors.white, fontSize: 20}}>Name:  {user.First_name} {user.Last_name}</Text>
-       <Text style={{color: Colors.white, fontSize: 20}}>Escoins:    {user.Escoins}</Text>
-       </View> } )}
-
-
-
+            {users.filter((val)=>{if(val.id == auth.currentUser.uid){return val}}).map((user) => 
+          {return <View key={user.id}> 
             
-           
-
-            <TouchableOpacity style={{width:"60%", height:"10%", marginTop: 40,borderRadius: 10, borderColor: Colors.lightgrey, borderWidth:2, alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate("Home") }>
-              <Text style={{color: Colors.white, fontSize: 20}}>Go Back</Text>
-            </TouchableOpacity>
+            <Text style={{color: Colors.white, fontSize: 20}}>Name:  {user.First_name} {user.Last_name}</Text>
+            <Text style={{color: Colors.white, fontSize: 20}}>Escoins:    {user.Escoins}</Text>
+            </View> } )}
 
             
             <TouchableOpacity style={{width:"60%", height:"10%", marginTop: 40,borderRadius: 10, borderColor: Colors.lightgrey, borderWidth:2, alignItems: 'center', justifyContent: 'center'}} onPress={handleSignOut}>
@@ -109,7 +104,48 @@ export default function Users(props) {
               </View>
             </Modal>
 
+
+            <Modal transparent={true} visible={achievementModal} animationType='fade'>
+              <View style={GlobalStyles.modal}>
+                <View
+                   style={{ elevation: 10, zIndex: 10, backgroundColor: Colors.black, flex: 1, width: "90%", height: "80%",  maxHeight: "80%",
+                    justifyContent: 'center',alignItems: 'center', borderRadius: 10, borderColor: Colors.darkgrey, borderWidth: 1}}>
+                          <TouchableOpacity onPress={()=>{setAchievementModal(false)}} style={{width:"12%", aspectRatio:1, borderColor: Colors.white, borderWidth: 1, borderRadius:6, justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={{color: Colors.white, fontSize: 20}}>X</Text>
+                          </TouchableOpacity>
+
+                            <Text style={{color: Colors.white, fontSize: 20}}>Achievements</Text>
+                            
+                            <br></br>
+
+                          <View style={{borderWidth:1,borderColor: Colors.white, borderRadius:5, width:"80%", height:"50%", }}>
+                           
+                          </View>
+                          
+                </View>
+              </View>
+            </Modal>
+
       </View>
+
+      <View style={{width:'100%', height:'14%', borderWidth: 0, borderColor:Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}> 
+
+      <TouchableOpacity style={{width:"20%", height:"80%",borderRadius: 10, borderColor: Colors.lightgrey, borderWidth:0, alignItems: 'center', justifyContent: 'center', marginLeft:"2%"}}
+       onPress={() => props.navigation.navigate("Home") }>
+             <Image source={profileImages.back} style={{width:'100%', height:'100%'}} resizeMode='stretch' />
+              
+      </TouchableOpacity>
+
+      <TouchableOpacity style={{width:"20%", height:"80%",borderRadius: 10, borderColor: Colors.lightgrey, borderWidth:0, alignItems: 'center', justifyContent: 'center', marginRight: "2%"}}
+       onPress={() => { setAchievementModal(true)}}>
+              <Image source={profileImages.achievement} style={{width:'100%', height:'100%'}} resizeMode='stretch' />
+
+      </TouchableOpacity>
+
+
+
+      </View>
+
             </ImageBackground>
       </ImageBackground>
 
