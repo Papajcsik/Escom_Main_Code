@@ -134,6 +134,14 @@ export const profileImages = {
   blankProfilePicture: require('../assets/images/Profile/profil-kepkeret.png'),
 };
 
+export const shopImages = {
+    screenBackground: require('../assets/images/ShopImages/escom-mobil-gombok-shop-hater.png'),
+    header: require('../assets/images/ShopImages/shop-header.png'),
+    logo: require('../assets/images/ShopImages/escom-header-logo.png'),
+    button: require('../assets/images/ShopImages/схоп-гиве-ме-монеѕ.png'),
+
+};
+
 export const countries = {
   "AF": "Afghanistan",
   "AX": "Aland Islands",

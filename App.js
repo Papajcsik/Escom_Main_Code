@@ -24,7 +24,7 @@ const Stack = createNativeStackNavigator();
 const HomeStack = () => {
   return(
 
-      <Tab.Navigator initialRouteName='Home1'
+      <Tab.Navigator initialRouteName='Shop'
             screenOptions={({ route }) => ({
               tabBarIcon: ({focused, color, size}) => {
                 
