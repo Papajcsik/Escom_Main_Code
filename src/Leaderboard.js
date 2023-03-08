@@ -84,14 +84,13 @@ export default function Leaderboard(props) {
       <View style={{width:"92%", height:"89%" , borderWidth: 1, borderColor: Colors.white, alignItems: 'center',}}>
        
         <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
-                          onPress={()=>{setCurrentIndex('Armory'); setTrigger(!trigger)}}>
+                          onPress={()=>{
+                            setCurrentIndex('Armory'); setTrigger(!trigger)}}>
           <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
         </TouchableOpacity>
 
-        
-     
       { currentIndex === 'Armory' && trigger &&
-        <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center',}}>
+        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.blue, alignItems: 'center',}}>
           
               <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 
@@ -164,11 +163,245 @@ export default function Leaderboard(props) {
         </View>
         }
 
+
+
         <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
                           onPress={()=>{setCurrentIndex('Weaponry'); setTrigger(!trigger)}}>
           <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
         </TouchableOpacity>
+        
+      { currentIndex === 'Weaponry' && trigger &&
+        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.red, alignItems: 'center',}}>
+          
+              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
+                 <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
+                  <View style={{flexDirection: 'row', width: "85%", height: "100%",alignItems:'center', justifyContent: 'center' , borderWidth: 0, borderColor: Colors.white }}>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>Player</Text>
+                  </View>
+                </View>
 
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft:"4%" }}>
+                  <View>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Played</Text>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Games</Text>
+                  </View>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
+                </View>
+          </View>
+          
+          <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
+           
+            {
+              users.map((element, i)=>(
+
+                  <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
+                      style={{width:"100%", height:"20%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
+                      backgroundColor: getBgColor(element.id),}}>
+                    
+                    <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
+
+                    
+                      <View style={{width:"10%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', justifyContent: 'center',}}>
+                        <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{i+1}</Text> 
+                      </View>
+                      
+                       <View style={{width:"90%", height:"100%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row',alignItems: 'center', justifyContent: 'space-between', paddingRight:"10%",}}>
+
+                        <View style={{height:"100%", width:"45%", paddingLeft:"2%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
+                          <Image source={IMAGES.logo} style={{height: "80%", aspectRatio: 1}}/>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026, paddingLeft:"5%"}}>{element.GameID}</Text> 
+                        </View>
+                       </View>
+                      </View>
+
+                        <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-around'  }}>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026,}}>{element.Played}</Text> 
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{element.Points}</Text> 
+                        </View>
+
+
+                  </TouchableOpacity>
+              ))
+            }
+         
+          </ScrollView>
+
+        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        
+            <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={()=>{myLocation()}}
+              style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+                <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.myLocation}/>
+            </TouchableOpacity>
+
+        </View>
+
+        </View>
+        }
+
+
+          <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
+                          onPress={()=>{setCurrentIndex('Energy'); setTrigger(!trigger)}}>
+          <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
+        </TouchableOpacity>
+        
+      { currentIndex === 'Energy' && trigger &&
+        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.primary, alignItems: 'center',}}>
+          
+              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
+                 <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
+                  <View style={{flexDirection: 'row', width: "85%", height: "100%",alignItems:'center', justifyContent: 'center' , borderWidth: 0, borderColor: Colors.white }}>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>Player</Text>
+                  </View>
+                </View>
+
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft:"4%" }}>
+                  <View>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Played</Text>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Games</Text>
+                  </View>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
+                </View>
+          </View>
+          
+          <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
+           
+            {
+              users.map((element, i)=>(
+
+                  <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
+                      style={{width:"100%", height:"20%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
+                      backgroundColor: getBgColor(element.id),}}>
+                    
+                    <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
+
+                    
+                      <View style={{width:"10%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', justifyContent: 'center',}}>
+                        <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{i+1}</Text> 
+                      </View>
+                      
+                       <View style={{width:"90%", height:"100%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row',alignItems: 'center', justifyContent: 'space-between', paddingRight:"10%",}}>
+
+                        <View style={{height:"100%", width:"45%", paddingLeft:"2%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
+                          <Image source={IMAGES.logo} style={{height: "80%", aspectRatio: 1}}/>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026, paddingLeft:"5%"}}>{element.GameID}</Text> 
+                        </View>
+                       </View>
+                      </View>
+
+                        <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-around'  }}>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026,}}>{element.Played}</Text> 
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{element.Points}</Text> 
+                        </View>
+
+
+                  </TouchableOpacity>
+              ))
+            }
+         
+          </ScrollView>
+
+        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        
+            <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={()=>{myLocation()}}
+              style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+                <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.myLocation}/>
+            </TouchableOpacity>
+
+        </View>
+
+        </View>
+        }
+
+          <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
+                          onPress={()=>{setCurrentIndex('Cyber'); setTrigger(!trigger)}}>
+          <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
+        </TouchableOpacity>
+        
+      { currentIndex === 'Cyber' && trigger &&
+        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.purple, alignItems: 'center',}}>
+          
+              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
+                 <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
+                  <View style={{flexDirection: 'row', width: "85%", height: "100%",alignItems:'center', justifyContent: 'center' , borderWidth: 0, borderColor: Colors.white }}>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>Player</Text>
+                  </View>
+                </View>
+
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft:"4%" }}>
+                  <View>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Played</Text>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Games</Text>
+                  </View>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
+                </View>
+          </View>
+          
+          <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
+           
+            {
+              users.map((element, i)=>(
+
+                  <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
+                      style={{width:"100%", height:"20%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
+                      backgroundColor: getBgColor(element.id),}}>
+                    
+                    <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
+
+                    
+                      <View style={{width:"10%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', justifyContent: 'center',}}>
+                        <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{i+1}</Text> 
+                      </View>
+                      
+                       <View style={{width:"90%", height:"100%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row',alignItems: 'center', justifyContent: 'space-between', paddingRight:"10%",}}>
+
+                        <View style={{height:"100%", width:"45%", paddingLeft:"2%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
+                          <Image source={IMAGES.logo} style={{height: "80%", aspectRatio: 1}}/>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026, paddingLeft:"5%"}}>{element.GameID}</Text> 
+                        </View>
+                       </View>
+                      </View>
+
+                        <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-around'  }}>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026,}}>{element.Played}</Text> 
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{element.Points}</Text> 
+                        </View>
+
+
+                  </TouchableOpacity>
+              ))
+            }
+         
+          </ScrollView>
+
+        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        
+            <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={()=>{myLocation()}}
+              style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+                <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.myLocation}/>
+            </TouchableOpacity>
+
+        </View>
+
+        </View>
+        }
       
    
 
