@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Image, StyleSheet, TouchableOpacity, View, Animated, DrawerLayoutAndroid, Pressable, Modal, Text } from 'react-native'
 import { Colors, navigationImages } from './Constants'
 import { Dimensions } from 'react-native'
@@ -6,6 +6,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Armory from './Armory';
 import GlobalStyles from './GlobalStyles';
+
+import { Transition } from 'react-native-reanimated';
+import { Transitioning } from 'react-native-reanimated';
+
 
 import { collection, getDocs, updateDoc, increment, doc} from 'firebase/firestore'
 import { auth, db} from '../firebase'
@@ -15,6 +19,14 @@ import { ref as sRef } from 'firebase/storage';
 import { Audio } from 'expo-av';
 import { useFirstInstallTime } from 'react-native-device-info';
 
+ export const transition = (
+    <Transition.Together>
+      <Transition.In type='fade' durationMs={2000}/>
+      <Transition.Change />
+      <Transition.Out type='fade' durationMs={2000}/>
+    </Transition.Together>
+  );
+  
 
 export default function BottomSheet(props) {
 
@@ -62,24 +74,10 @@ export default function BottomSheet(props) {
     }
 ///////////////////////////////////////////////////////////up and down moving
 
-    const [position, setPosition] = useState(91.86);
+    const [position, setPosition] = useState(false);
+    const reference = useRef();
 
-   const handleBottomSheet = () => {
-    
 
-    if(position === 91.86)
-    {
-        setPosition(61);
-        return;
-    }
-    if(position === 61)
-    {
-        setPosition(91.86);
-        return;
-    }
-    return;
-    
-    };
 
     
 ///////////////////////////////////////////////////////////////click sound
@@ -106,17 +104,29 @@ const [sound, setSound] = useState();
   }, [sound]);
 
   return (
-    <Animated.View style={{width:"90%", height: height/3.5, position: 'absolute', backgroundColor: Colors.opacityBlue, top:""+position+"%", alignItems: 'center' }}>
+    <Transitioning.View 
+     ref={reference}
+     transition={transition}
+     
+     style={{width:"90%", height: height/3.5, position: 'absolute',borderWidth:0, 
+    borderColor: Colors.white, backgroundColor: Colors.opacityBlue, alignItems: 'center',
+     alignSelf: 'center', justifyContent: 'flex-end', flexGrow: 1 }}
+     >
 
         <Pressable 
             style={{height:"17%", width:"100%", borderWidth:0, borderColor: Colors.white, }} 
-            onPress={() => { handleBottomSheet()}}>
+            onPress={() => { 
+              
+              reference.current.animateNextTransition();
+              setPosition(!position);
+              }}>
             <Image source={navigationImages.choose_department} style={{height:"100%", width:"100%", resizeMode:'stretch' }} />
         </Pressable>
 
 
 
-        <View style={{width:"100%", height:"83%", backgroundColor: Colors.opacityBlue,  justifyContent: 'space-evenly'}}>
+      { position &&
+         <View style={{width:"100%", height:"83%", backgroundColor: Colors.opacityBlue,  justifyContent: 'space-evenly'}}>
          
             <View style={{height: "50%", width:"100%",paddingTop:"1%", paddingBottom:"0.5%", borderWidth:0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <TouchableOpacity 
@@ -149,7 +159,7 @@ const [sound, setSound] = useState();
             </View>
 
         </View>
-
+      }
 
     <Modal transparent={true} visible={escoinModalState} animationType={'fade'} >
         <View style={[GlobalStyles.modal]} >
@@ -171,7 +181,7 @@ const [sound, setSound] = useState();
     </Modal>
 
 
-    </Animated.View>
+    </Transitioning.View>
   )
   
 }

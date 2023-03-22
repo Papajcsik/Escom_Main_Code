@@ -103,13 +103,16 @@ export default function HomePage(props) {
     </View>
 
     <View style={{width:"100%", height:"87%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center'}}>
-    <ImageBackground source={IMAGES.home_background} style={{height: "96%", width:"100%", justifyContent: 'center', alignSelf: 'center',bottom: "-2%", borderWidth: 0, borderColor: Colors.purple}}>
+    <ImageBackground source={IMAGES.home_background}
+     style={{height: "96%", width:"100%", alignSelf: 'center',bottom: "-2%", justifyContent: 'flex-end', borderWidth: 0, borderColor: Colors.purple}}>
+            
+            <BottomSheet escoin={escoin} props={props} />
     
     </ImageBackground>
                
         
         
-        <BottomSheet escoin={escoin} props={props} />
+        
     
     
 

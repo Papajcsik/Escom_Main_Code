@@ -41,7 +41,7 @@ export default function Weaponry(props) {
      "m","n","o","s",]);
 
 
-  const [escoin, setEscoin] = useState(0);
+  const [escoin, setEscoin] = useState(10);
   const [dumpingTomb, setDumpingTomb] = useState([ null, null, null, null, null, null, null ]);
 
 ////////////////////////////////////////////////////////////music
@@ -146,32 +146,42 @@ useEffect(() => {
 
 useEffect(() => {
 
-  console.log("Uj Jatek");
-  if(escoin === 0)
+   console.log("Uj Jatek");
+  if(escoin <= 0)
   {
     setResetGameModalState(true);
   }
-  if(escoin !== 0)
-  {
-    setEscoin(escoin -1);
-  }
+ 
 
   console.log("keverem a betuket " + ShuffledLetters);
 
-    for(var i=0; i < ShuffledLetters.length; i++)
-    {
-      var tempLetter = ShuffledLetters[i];
-      var randomIndex = Math.floor(Math.random() * ShuffledLetters.length);
-      ShuffledLetters[i] = ShuffledLetters[randomIndex];
-      ShuffledLetters[randomIndex] = tempLetter;
-    }
-    console.log("megkevert betuk " + ShuffledLetters);
+    // for(var i=0; i < ShuffledLetters.length; i++)
+    // {
+    //   var tempLetter = ShuffledLetters[i];
+    //   var randomIndex = Math.floor(Math.random() * ShuffledLetters.length);
+    //   ShuffledLetters[i] = ShuffledLetters[randomIndex];
+    //   ShuffledLetters[randomIndex] = tempLetter;
+    // }
+    // console.log("megkevert betuk " + ShuffledLetters);
 
-     for(var j=0; j < megoldas.length; j++)                            //random megoldas ki/be kapcsolas
+    //  for(var j=0; j < megoldas.length; j++)                            //random megoldas ki/be kapcsolas
+    //   {
+    //      megoldas[j] = ShuffledLetters[j];
+    //   }
+    //  setMegoldas([... megoldas]);
+
+    /////////////////////////////////////////////////////////////// experiment -- duplicate shuffeling
+
+      var randomIndex = 0;
+      
+      for(var l=0; l<7; l++)
       {
-         megoldas[j] = ShuffledLetters[j];
+        randomIndex = Math.floor(Math.random() * ShuffledLetters.length);
+        megoldas[l] = ShuffledLetters[randomIndex];
       }
-     setMegoldas([... megoldas]);
+      setMegoldas([...megoldas]);
+
+
 
   console.log("a kevert Megoldas " + megoldas);
 
@@ -185,22 +195,37 @@ useEffect(() => {
   const [timerON, setTimerOn] = useState(false);      // szamol e vagy sem
 
   useEffect(() => {                                     //szamlaluk az idot
-    let interval = null;
+   
+    // let interval = null;
 
+    // if(timerON)
+    // {
+    //     interval = setInterval(() => {
+    //         setTime(prevTime => prevTime - 10);           // 10ms minusz minden 10ms-nal
+    //     }, 10);
+        
+    // } else {
+    //   clearInterval(interval);
+    // }
+    
+    // return () => clearInterval(interval);
+
+    ////////////////////////////////////////////////////////////other timer
+
+    
     if(timerON)
     {
-        interval = setInterval(() => {
-            setTime(prevTime => prevTime - 10);           // 10ms minusz minden 10ms-nal
-        }, 10);
+      setTimeout(() => {
         
-    } else {
-      clearInterval(interval);
+        setTime( time - 1000 );
+      }, 1000);
+
     }
-    
-    return () => clearInterval(interval);
+
+    return;
 
 
-  }, [timerON])
+  }, [timerON, time])
 
   useEffect(() => {                                     //figyeljuk vesztett e
     if(time === 0 || time <= 0)
@@ -561,8 +586,8 @@ const backgroundImage = require('../gombok/Weaponry/escom-mobil-gombokuj-nagy-ha
 
             <Text style={{ fontWeight: 'bold', letterSpacing: 6, fontSize: 20, color: Colors.white, alignSelf: 'center' }}>You Win</Text>
             <Text style={GlobalStyles.modalText}>Tying again <br></br> costs 1 ESCoin</Text>
-              <TouchableOpacity style={GlobalStyles.modalButton} onPress={() => {closeModal()}}>
-                <Text style={GlobalStyles.modalText}>Try again?</Text>  
+              <TouchableOpacity style={[GlobalStyles.modalButton, {marginTop:14}]} onPress={() => {props.navigation.navigate('Home'); closeModal()  }}>
+                <Text style={GlobalStyles.modalText}>Go Home</Text>  
               </TouchableOpacity>
           </View>
         </View>
@@ -576,9 +601,7 @@ const backgroundImage = require('../gombok/Weaponry/escom-mobil-gombokuj-nagy-ha
 
             <Text style={{ fontWeight: 'bold', letterSpacing: 6, fontSize: 20, color: Colors.white, alignSelf: 'center' }}>You Lose</Text>
             <Text style={GlobalStyles.modalText}>Tying again <br></br> costs 1 ESCoin</Text>
-              <TouchableOpacity style={GlobalStyles.modalButton} onPress={() => {closeModal()}}>
-                <Text style={GlobalStyles.modalText}>Try again?</Text>  
-              </TouchableOpacity>
+              
               <TouchableOpacity style={[GlobalStyles.modalButton, {marginTop:14}]} onPress={() => {props.navigation.navigate('Home'); closeModal()  }}>
                 <Text style={GlobalStyles.modalText}>Go Home</Text>  
               </TouchableOpacity>

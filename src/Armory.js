@@ -174,7 +174,7 @@ useEffect(() => {
 useEffect(() => {
 
   console.log("Uj Jatek");
-  if(escoin >= 0)
+  if(escoin <= 0)
   {
     setResetGameModalState(true);
   }
@@ -182,20 +182,33 @@ useEffect(() => {
 
   console.log("keverem a betuket " + ShuffledLetters);
 
-    for(var i=0; i < ShuffledLetters.length; i++)
-    {
-      var tempLetter = ShuffledLetters[i];
-      var randomIndex = Math.floor(Math.random() * ShuffledLetters.length);
-      ShuffledLetters[i] = ShuffledLetters[randomIndex];
-      ShuffledLetters[randomIndex] = tempLetter;
-    }
-    console.log("megkevert betuk " + ShuffledLetters);
+    // for(var i=0; i < ShuffledLetters.length; i++)
+    // {
+    //   var tempLetter = ShuffledLetters[i];
+    //   var randomIndex = Math.floor(Math.random() * ShuffledLetters.length);
+    //   ShuffledLetters[i] = ShuffledLetters[randomIndex];
+    //   ShuffledLetters[randomIndex] = tempLetter;
+    // }
+    // console.log("megkevert betuk " + ShuffledLetters);
 
-     for(var j=0; j < megoldas.length; j++)                            //random megoldas ki/be kapcsolas
+    //  for(var j=0; j < megoldas.length; j++)                            //random megoldas ki/be kapcsolas
+    //   {
+    //      megoldas[j] = ShuffledLetters[j];
+    //   }
+    //  setMegoldas([... megoldas]);
+
+    /////////////////////////////////////////////////////////////// experiment -- duplicate shuffeling
+
+      var randomIndex = 0;
+      
+      for(var l=0; l<5; l++)
       {
-         megoldas[j] = ShuffledLetters[j];
+        randomIndex = Math.floor(Math.random() * ShuffledLetters.length);
+        megoldas[l] = ShuffledLetters[randomIndex];
       }
-     setMegoldas([... megoldas]);
+      setMegoldas([...megoldas]);
+
+
 
   console.log("a kevert Megoldas " + megoldas);
 
@@ -209,22 +222,38 @@ useEffect(() => {
   const [timerON, setTimerOn] = useState(false);      // szamol e vagy sem
 
   useEffect(() => {                                     //szamlaluk az idot
-    let interval = null;
+   
+    // let interval = null;
 
+    // if(timerON)
+    // {
+    //     interval = setInterval(() => {
+    //         setTime(prevTime => prevTime - 10);           // 10ms minusz minden 10ms-nal
+    //     }, 10);
+        
+    // } else {
+    //   clearInterval(interval);
+    // }
+    
+    // return () => clearInterval(interval);
+
+
+////////////////////////////////////////////////////////////other timer
+
+    
     if(timerON)
     {
-        interval = setInterval(() => {
-            setTime(prevTime => prevTime - 10);           // 10ms minusz minden 10ms-nal
-        }, 10);
+      setTimeout(() => {
         
-    } else {
-      clearInterval(interval);
+        setTime( time - 1000 );
+      }, 1000);
+
     }
-    
-    return () => clearInterval(interval);
+   
+    return ;
 
 
-  }, [timerON])
+  }, [timerON, time])
 
   useEffect(() => {                                     //figyeljuk vesztett e
     if(time === 0 || time <= 0)
@@ -474,7 +503,7 @@ const update= async () =>{
         console.log("superiorJelenlegi " + superiorJelenlegi);
 
       }
-
+  
     return;
   } 
 
