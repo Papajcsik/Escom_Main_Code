@@ -40,7 +40,8 @@ export default function Welcome(props) {
         <View style={{width:'100%', height:"100%", justifyContent: 'center', alignItems: 'center'}}>
               
                 <Image source={ IMAGES.logo} style={{height:"35%", aspectRatio:1}}/>
-                <Text style={{color: Colors.white, fontSize: 50, fontWeight: 'bold'}}>ESCOM</Text>
+                
+                <Image source={navigationImages.bigLogo} style={{width:"80%", height:"12%", resizeMode:'cover'}}/>
 
                 <TouchableOpacity style={{height:"9%", aspectRatio:3.1, marginTop: 40}} onPress={() => {playSound(); props.navigation.navigate('Blueprint')}}>
                     <ImageBackground source={ navigationImages.tutorial } style={{aspectRatio:3, height:"100%",}} >

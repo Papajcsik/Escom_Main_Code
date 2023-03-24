@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react'
-import { View, Text, Pressable, TouchableOpacity, Image, SafeAreaView, ImageBackground, StatusBar, Dimensions, ScrollView, Modal } from 'react-native'
+import { View, Text, Pressable, TouchableOpacity, Image, SafeAreaView, ImageBackground, StatusBar, Dimensions, ScrollView, Modal, FlatList } from 'react-native'
 import BottomSheet from './BottomSheet';
 import { Colors, IMAGES, LeaderboardImages, navigationImages } from './Constants'
 import GlobalStyles from './GlobalStyles';
@@ -42,20 +42,55 @@ export default function Leaderboard(props) {
     {id: 10, image: IMAGES.escoin_image, player: 'gipsy', playedGames: 9, points: 3 },
   ]);*/
 
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [trigger, setTrigger] = useState(false);
-
-
+  const [currentIndex, setCurrentIndex] = useState("Armory");
+ 
 
     const [playerModal, setPlayerModal] = useState(false);
 
-    const getBgColor = (id) => {                //your profile - indicator
+    const getBgColor = (id, department) => {                //your profile - indicator
 
-      if(id ==loggedInPlayerId)
+      if(id == loggedInPlayerId && department === "Armor")
       {
         return Colors.blue;
       }
+      if(id == loggedInPlayerId && department === "Weapon")
+      {
+        return Colors.red;
+      }
+      if(id == loggedInPlayerId && department === "Energy")
+      {
+        return Colors.energyGreen;
+      }
+      if(id == loggedInPlayerId && department === "Cyber")
+      {
+        return Colors.cyberPurple;
+      }
+
       return Colors.opacityBlue;
+    };
+
+
+
+
+    const getHeader = () => {
+
+      if(currentIndex === "Armory")
+      {
+        return LeaderboardImages.headerArmor;
+      }
+      if(currentIndex === "Weaponry")
+      {
+        return LeaderboardImages.headerWeapon;
+      }
+      if(currentIndex === "Energy")
+      {
+        return LeaderboardImages.headerEnergy;
+      }
+      if(currentIndex === "Cyber")
+      {
+        return LeaderboardImages.headerCyber;
+      }
+      return LeaderboardImages.headerArmor;
     };
 
     const myLocation = () => {
@@ -74,25 +109,73 @@ export default function Leaderboard(props) {
   return (
     <SafeAreaView style={{ height: "100%", width: "100%" ,backgroundColor: Colors.trueBlack}}>
     
-        <StatusBar style="dark" />
+        <StatusBar style="hidden" />
 
-  
+      <View style={{width:"100%", height:"96%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', paddingTop: "1%"}}>
 
-   
-      <View style={{width:"100%", height:"96%" , borderWidth: 1, borderColor: Colors.blue, alignItems: 'center', paddingTop: "4%"}}>
+                <View style={{width:"98%", height:"20%" , zIndex: 1, borderWidth: 0, borderColor: Colors.white, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between'}}>
 
-      <View style={{width:"92%", height:"89%" , borderWidth: 1, borderColor: Colors.white, alignItems: 'center',}}>
-       
-        <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
+                  <View style={{height: "100%", width:"38%", justifyContent: 'space-evenly', borderColor: Colors.white, borderWidth: 0}}>
+                    
+                    <TouchableOpacity style={{width:"96%", height: "46%", borderWidth: 0, borderColor: Colors.blue}}
+                                      onPress={()=>{
+                                        setCurrentIndex('Armory')}}>
+                      <Image style={{height:"100%", width: '100%', resizeMode: 'cover'}} source={LeaderboardImages.armorButton}/>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={{width:"96%", height: "46%", borderWidth: 0, borderColor: Colors.red}}
                           onPress={()=>{
-                            setCurrentIndex('Armory'); setTrigger(!trigger)}}>
-          <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
-        </TouchableOpacity>
+                            setCurrentIndex('Weaponry')}}>
+                      <Image style={{width:"100%", height:"100%", resizeMode: 'cover'}} source={LeaderboardImages.weaponButton}/>
+                    </TouchableOpacity>
 
-      { currentIndex === 'Armory' && trigger &&
-        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.blue, alignItems: 'center',}}>
+                  </View>
+
+
+
+                  <View style={{ position: 'absolute', height: "100%", width:"42%", zIndex: -1, justifyContent: 'flex-end', alignItems: 'center', alignSelf: 'center', marginLeft: "29%", borderColor: Colors.white, borderWidth: 0}}>
+
+                      <Text style={{color: Colors.white, fontSize: height/70, letterSpacing: 1, fontWeight: 'bold' }}>LEADERBOARD</Text>        
+                    
+                    <View style={{width:"100%", height: '80%', justifyContent: 'center', alignItems: 'center', top: 14, borderColor: Colors.white, borderWidth: 0  }}>
+                      <ImageBackground style={{width:"100%", height:"98%", resizeMode: 'cover', alignItems: 'center', justifyContent: 'flex-end', paddingBottom:"8%",
+                                                borderColor: Colors.white, borderWidth: 0 }} 
+                                       source={getHeader()}>
+                            <Text style={{color: Colors.white, fontSize: height/78, letterSpacing: 2, fontWeight: 'bold', zIndex: 2 , }}>Top CONTRACTORS</Text>
+                      </ImageBackground>
+
+                    </View>
+                    
+                  </View>
+
+
+
+                  <View style={{height: "100%", width:"38%", justifyContent: 'space-evenly', borderColor: Colors.white, borderWidth: 0}}>
+                    
+                    <TouchableOpacity style={{width:"96%", height: "46%", borderWidth: 0, borderColor: Colors.primary}}
+                                      onPress={()=>{
+                                        setCurrentIndex('Energy')}}>
+                      <Image style={{height:"100%", width: '100%', resizeMode: 'cover'}} source={LeaderboardImages.energyButton}/>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={{width:"96%", height: "46%", borderWidth: 0, borderColor: Colors.purple}}
+                          onPress={()=>{
+                            setCurrentIndex('Cyber')}}>
+                      <Image style={{width:"100%", height:"100%", resizeMode: 'cover'}} source={LeaderboardImages.cyberButton}/>
+                    </TouchableOpacity>
+
+                  </View>
+                    
+               </View>
+       
+        <View style={{width:"92%", height:"80%" , borderWidth: 0, borderColor: Colors.white, alignItems: 'center',}}>
+       
+        
+
+      { currentIndex === 'Armory' && 
+        <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
           
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 
                 <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
@@ -109,15 +192,18 @@ export default function Leaderboard(props) {
                   <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
                 </View>
           </View>
-          
+
+
+          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+
           <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
            
             {
               users.map((element, i)=>(
 
                   <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
-                      style={{width:"100%", height:"20%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
-                      backgroundColor: getBgColor(element.id),}}>
+                      style={{width:"100%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
+                      backgroundColor: getBgColor(element.id, 'Armor'),}}>
                     
                     <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
 
@@ -147,10 +233,92 @@ export default function Leaderboard(props) {
          
           </ScrollView>
 
-        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        </View>
+
+        <View style={{width:"96%", height:"10%" , borderWidth: 0, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
         
             <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
-              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAllArmor}/>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={()=>{myLocation()}}
+              style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+                <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.myLocation}/>
+            </TouchableOpacity>
+
+        </View>
+
+        </View>
+        }
+
+        
+      { currentIndex === 'Weaponry' && 
+        <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
+          
+              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
+                 <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
+                  <View style={{flexDirection: 'row', width: "85%", height: "100%",alignItems:'center', justifyContent: 'center' , borderWidth: 0, borderColor: Colors.white }}>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>Player</Text>
+                  </View>
+                </View>
+
+                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft:"4%" }}>
+                  <View>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Played</Text>
+                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Games</Text>
+                  </View>
+                  <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
+                </View>
+          </View>
+
+
+          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+
+          <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
+           
+            {
+              users.map((element, i)=>(
+
+                  <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
+                      style={{width:"100%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
+                      backgroundColor: getBgColor(element.id, 'Weapon'),}}>
+                    
+                    <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
+
+                    
+                      <View style={{width:"10%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', justifyContent: 'center',}}>
+                        <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{i+1}</Text> 
+                      </View>
+                      
+                       <View style={{width:"90%", height:"100%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row',alignItems: 'center', justifyContent: 'space-between', paddingRight:"10%",}}>
+
+                        <View style={{height:"100%", width:"45%", paddingLeft:"2%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
+                          <Image source={IMAGES.logo} style={{height: "80%", aspectRatio: 1}}/>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026, paddingLeft:"5%"}}>{element.GameID}</Text> 
+                        </View>
+                       </View>
+                      </View>
+
+                        <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-around'  }}>
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026,}}>{element.Played}</Text> 
+                          <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{element.Points}</Text> 
+                        </View>
+
+
+                  </TouchableOpacity>
+              ))
+            }
+         
+          </ScrollView>
+
+        </View>
+
+        <View style={{width:"96%", height:"10%" , borderWidth: 0, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        
+            <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAllWeapon}/>
             </TouchableOpacity>
             <TouchableOpacity 
               onPress={()=>{myLocation()}}
@@ -164,16 +332,12 @@ export default function Leaderboard(props) {
         }
 
 
-
-        <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
-                          onPress={()=>{setCurrentIndex('Weaponry'); setTrigger(!trigger)}}>
-          <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
-        </TouchableOpacity>
-        
-      { currentIndex === 'Weaponry' && trigger &&
-        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.red, alignItems: 'center',}}>
           
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+        
+      { currentIndex === 'Energy' && 
+        <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
+          
+              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 
                 <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
@@ -190,15 +354,18 @@ export default function Leaderboard(props) {
                   <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
                 </View>
           </View>
-          
+
+
+          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+
           <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
            
             {
               users.map((element, i)=>(
 
                   <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
-                      style={{width:"100%", height:"20%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
-                      backgroundColor: getBgColor(element.id),}}>
+                      style={{width:"100%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
+                      backgroundColor: getBgColor(element.id, 'Energy'),}}>
                     
                     <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
 
@@ -228,10 +395,12 @@ export default function Leaderboard(props) {
          
           </ScrollView>
 
-        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        </View>
+
+        <View style={{width:"96%", height:"10%" , borderWidth: 0, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
         
             <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
-              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAllEnergy}/>
             </TouchableOpacity>
             <TouchableOpacity 
               onPress={()=>{myLocation()}}
@@ -244,16 +413,12 @@ export default function Leaderboard(props) {
         </View>
         }
 
-
-          <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
-                          onPress={()=>{setCurrentIndex('Energy'); setTrigger(!trigger)}}>
-          <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
-        </TouchableOpacity>
-        
-      { currentIndex === 'Energy' && trigger &&
-        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.primary, alignItems: 'center',}}>
           
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+        
+      { currentIndex === 'Cyber' &&
+        <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
+          
+              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 
                 <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
@@ -270,15 +435,18 @@ export default function Leaderboard(props) {
                   <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
                 </View>
           </View>
-          
+
+
+          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+
           <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
            
             {
               users.map((element, i)=>(
 
                   <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
-                      style={{width:"100%", height:"20%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
-                      backgroundColor: getBgColor(element.id),}}>
+                      style={{width:"100%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
+                      backgroundColor: getBgColor(element.id, 'Cyber'),}}>
                     
                     <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
 
@@ -308,89 +476,12 @@ export default function Leaderboard(props) {
          
           </ScrollView>
 
-        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
-        
-            <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
-              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              onPress={()=>{myLocation()}}
-              style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
-                <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.myLocation}/>
-            </TouchableOpacity>
-
         </View>
 
-        </View>
-        }
-
-          <TouchableOpacity style={{width:"100%", aspectRatio: 6}}
-                          onPress={()=>{setCurrentIndex('Cyber'); setTrigger(!trigger)}}>
-          <Image style={{width:"100%", height:"100%"}} source={LeaderboardImages.armorLeaderBoard}/>
-        </TouchableOpacity>
-        
-      { currentIndex === 'Cyber' && trigger &&
-        <View style={{width:"100%", height:"90%" , borderWidth: 3, borderColor: Colors.purple, alignItems: 'center',}}>
-          
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth:1, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                
-                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
-                 <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
-                  <View style={{flexDirection: 'row', width: "85%", height: "100%",alignItems:'center', justifyContent: 'center' , borderWidth: 0, borderColor: Colors.white }}>
-                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>Player</Text>
-                  </View>
-                </View>
-
-                <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft:"4%" }}>
-                  <View>
-                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Played</Text>
-                    <Text style={{ color:Colors.white, fontSize: height * 0.013}}>Games</Text>
-                  </View>
-                  <Text style={{ color:Colors.white, fontSize: height * 0.020, paddingLeft:"4%"}}>Points</Text>
-                </View>
-          </View>
-          
-          <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
-           
-            {
-              users.map((element, i)=>(
-
-                  <TouchableOpacity key={i} onPress={()=>{setPlayerModal(true)}} 
-                      style={{width:"100%", height:"20%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', 
-                      backgroundColor: getBgColor(element.id),}}>
-                    
-                    <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "3%", justifyContent: 'space-between'  }}>
-
-                    
-                      <View style={{width:"10%", height:"100%", borderWidth: 0, borderColor: Colors.purple, flexDirection: 'row',alignItems: 'center', justifyContent: 'center',}}>
-                        <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{i+1}</Text> 
-                      </View>
-                      
-                       <View style={{width:"90%", height:"100%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row',alignItems: 'center', justifyContent: 'space-between', paddingRight:"10%",}}>
-
-                        <View style={{height:"100%", width:"45%", paddingLeft:"2%", borderWidth: 0, borderColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
-                          <Image source={IMAGES.logo} style={{height: "80%", aspectRatio: 1}}/>
-                          <Text style={{ color:Colors.white, fontSize: height * 0.026, paddingLeft:"5%"}}>{element.GameID}</Text> 
-                        </View>
-                       </View>
-                      </View>
-
-                        <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '40%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-around'  }}>
-                          <Text style={{ color:Colors.white, fontSize: height * 0.026,}}>{element.Played}</Text> 
-                          <Text style={{ color:Colors.white, fontSize: height * 0.026}}>{element.Points}</Text> 
-                        </View>
-
-
-                  </TouchableOpacity>
-              ))
-            }
-         
-          </ScrollView>
-
-        <View style={{width:"96%", height:"10%" , borderWidth: 1, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
+        <View style={{width:"96%", height:"10%" , borderWidth: 0, borderColor: Colors.white, flexDirection:'row', justifyContent: 'space-between'}}>
         
             <TouchableOpacity style={{width:"45%", height:"100%",borderWidth: 0, borderColor: Colors.white,}}>
-              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAll}/>
+              <Image style={{width:"100%",aspectRatio:4}} source={LeaderboardImages.showAllCyber}/>
             </TouchableOpacity>
             <TouchableOpacity 
               onPress={()=>{myLocation()}}
@@ -403,12 +494,7 @@ export default function Leaderboard(props) {
         </View>
         }
       
-   
-
       </View>
-
-
-
 
       
 

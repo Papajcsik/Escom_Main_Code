@@ -17,6 +17,8 @@ export const Colors = {
   trueBlack: "#000000",
   darkPurple:"#220f18",
   purple:"#f11e64",
+  cyberPurple:"#430275",
+  energyGreen:"#008645",
 
 };
 
@@ -51,6 +53,7 @@ export const navigationImages = {
     tutorial: require('../assets/images/navigationImages/REACT-kezdolap-tutorial-gom.png'),
 
     tutorialBackground: require('../assets/images/navigationImages/ESCom-mobilos-concept-trial-mode.png'),
+    bigLogo: require('../assets/images/Earth-security-command.png'),
 
 };
 
@@ -111,8 +114,35 @@ export const WeaponImages = {
 
 export const LeaderboardImages = {
   armorLeaderBoard: require('../assets/images/LeaderBoardImages/ARMOR-LEADERBOARD-HEADER.png'),
+
   showAll: require('../assets/images/LeaderBoardImages//SHOW-ME-ALL.png'),
   myLocation: require('../assets/images/LeaderBoardImages/MY-LOCATION.png'),
+  showAllArmor: require('../assets/images/LeaderBoardImages/SHOW-ME-ALL--armor.png'),
+  showAllWeapon: require('../assets/images/LeaderBoardImages/SHOW-ME-AL--weapon.png'),
+  showAllEnergy: require('../assets/images/LeaderBoardImages/SHOW-ME-AL--energy.png'),
+  showAllCyber: require('../assets/images/LeaderBoardImages/SHOW-ME-AL-cybercore.png'),
+
+  armor: require('../assets/images/LeaderBoardImages/armor-gomb-leaderboard.png'),
+  weapon: require('../assets/images/LeaderBoardImages/weapon-gomb-leaderboard.png'),
+  energy: require('../assets/images/LeaderBoardImages/energy-gomb-leaderboard.png'),
+  cyber: require('../assets/images/LeaderBoardImages/cybercore-gomb-leaderboard.png'),
+
+  headerArmor: require('../assets/images/LeaderBoardImages/ARMOR-LEADERBOARD-HEADER.png'),
+  headerWeapon: require('../assets/images/LeaderBoardImages/weapon-header.png'),
+  headerEnergy: require('../assets/images/LeaderBoardImages/energy-header.png'),
+  headerCyber: require('../assets/images/LeaderBoardImages/cybercore-header.png'),
+
+  armorButton: require('../assets/images/LeaderBoardImages/armor-gomb-leaderboard.png'),
+  weaponButton: require('../assets/images/LeaderBoardImages/weapon-gomb-leaderboard.png'),
+  energyButton: require('../assets/images/LeaderBoardImages/energy-gomb-leaderboard.png'),
+  cyberButton: require('../assets/images/LeaderBoardImages/cybercore-gomb-leaderboard.png'),
+
+
+
+
+
+
+
   
 };
 
