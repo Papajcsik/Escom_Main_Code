@@ -175,7 +175,7 @@ export default function Leaderboard(props) {
       { currentIndex === 'Armory' && 
         <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
           
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View style={{width:"100%", height:"10%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: "2%"}}>
                 
                 <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
@@ -194,7 +194,7 @@ export default function Leaderboard(props) {
           </View>
 
 
-          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+          <View style={{height:"90%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
 
           <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
            
@@ -255,7 +255,7 @@ export default function Leaderboard(props) {
       { currentIndex === 'Weaponry' && 
         <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
           
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View style={{width:"100%", height:"10%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: "2%"}}>
                 
                 <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
@@ -274,7 +274,7 @@ export default function Leaderboard(props) {
           </View>
 
 
-          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+          <View style={{height:"90%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
 
           <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
            
@@ -337,7 +337,7 @@ export default function Leaderboard(props) {
       { currentIndex === 'Energy' && 
         <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
           
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View style={{width:"100%", height:"10%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: "2%"}}>
                 
                 <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
@@ -356,7 +356,7 @@ export default function Leaderboard(props) {
           </View>
 
 
-          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+          <View style={{height:"90%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
 
           <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
            
@@ -418,7 +418,7 @@ export default function Leaderboard(props) {
       { currentIndex === 'Cyber' &&
         <View style={{width:"100%", height:"90%" , borderWidth: 0, borderColor: Colors.blue, alignItems: 'center', backgroundColor: Colors.darkBlue }}>
           
-              <View style={{width:"100%", height:"8%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <View style={{width:"100%", height:"10%" ,borderWidth: 0, borderBottomWidth: 0, borderColor: Colors.white, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: "2%"}}>
                 
                 <View style={{borderWidth: 0, borderColor: Colors.white, height: "100%", width: '60%', flexDirection: 'row', alignItems: 'center', paddingLeft: "4%", justifyContent: 'space-between'  }}>
                  <Text style={{ color:Colors.white, fontSize: height * 0.026}}>#</Text>
@@ -437,7 +437,7 @@ export default function Leaderboard(props) {
           </View>
 
 
-          <View style={{height:"92%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
+          <View style={{height:"90%", width:"100%", borderWidth: 0, borderColor: Colors.purple,}}>
 
           <ScrollView style={{width:"100%", height:"94%", borderWidth: 0, borderColor: Colors.blue, }}>
            

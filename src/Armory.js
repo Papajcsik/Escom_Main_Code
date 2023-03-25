@@ -77,7 +77,7 @@ export default function Armory(props) {
 
   async function playSound() {
     console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync( require('../assets/Music/ArmoryBackgroundMusic.mp3')
+    const { sound } = await Audio.Sound.createAsync( require('../assets/Music/TunePocket-Colossus.mp3')
     );
     setSound(sound);
 

@@ -152,6 +152,7 @@ export const Musics  = {
   backgroundMusic: require('../assets/Music/Background_music_(Extrahuman).mp3'),
   click: require('../assets/Music/Touch_Sound_Effect.mp3'),
   armoryBgMusic: require('../assets/Music/ArmoryBackgroundMusic.mp3'),
+  armoryBgMusicNEW: require('../assets/Music/TunePocket-Colossus.mp3'),
 
 };
 
